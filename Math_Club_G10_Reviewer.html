@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math Club G10 Reviewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1720;
+    --panel:#16212C;
+    --panel2:#1C2B38;
+    --grid:rgba(255,255,255,0.05);
+    --ink:#E7EEF3;
+    --ink-soft:#8FA3B5;
+    --cyan:#35C6E0;
+    --magenta:#E85D9E;
+    --amber:#F2B84B;
+    --line:rgba(255,255,255,0.09);
+    --card:#131E28;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 30px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/30px 100%,
+      var(--bg);
+    color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:var(--cyan);}
+
+  .hero{
+    background:radial-gradient(900px 340px at 85% -20%, rgba(232,93,158,.18), transparent 60%),
+               radial-gradient(700px 300px at 5% 0%, rgba(53,198,224,.14), transparent 60%),
+               linear-gradient(160deg,#0B131B,#101C27);
+    padding:56px 24px 46px; border-bottom:1px solid var(--line); position:relative; overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:340px;height:340px;
+    border-radius:50%;border:1.5px dashed rgba(53,198,224,.25);pointer-events:none;}
+  .hero-inner{max-width:960px;margin:0 auto;position:relative;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);
+    background:rgba(53,198,224,.09);border:1px solid rgba(53,198,224,.28);padding:6px 12px;
+    border-radius:100px;margin-bottom:18px;}
+  .hero h1{font-size:clamp(28px,4.2vw,42px);margin:0 0 14px;font-weight:600;line-height:1.14;
+    background:linear-gradient(90deg,#fff,#BFE9F2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{max-width:640px;color:var(--ink-soft);font-size:16px;margin:0 0 8px;}
+  .hero-credit{font-size:12.5px;color:#6C8598;font-family:'JetBrains Mono',monospace;}
+  .hero-credits{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);}
+  .hero-credits h2{font-size:15px;margin:0 0 6px;color:#BFE9F2;font-weight:600;letter-spacing:.02em;}
+  .hero-credits h2 + h2{margin-top:14px;}
+  .hero-credits p{font-size:12.5px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;margin:0 0 4px;line-height:1.6;}
+
+  .tabbar{position:sticky;top:0;z-index:20;background:rgba(15,23,32,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding:10px 16px;}
+  .tabbar-inner{max-width:1040px;margin:0 auto;display:flex;gap:8px;}
+  .tab{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:13.5px;color:var(--ink-soft);
+    background:var(--panel);border:1.5px solid var(--line);padding:7px 14px;border-radius:100px;
+    cursor:pointer;flex:0 0 auto;transition:.15s;}
+  .tab:hover{border-color:var(--cyan);color:var(--cyan);}
+  .tab.active{background:var(--cyan);border-color:var(--cyan);color:#06222A;}
+
+  main{max-width:1040px;margin:0 auto;padding:36px 20px 20px;}
+  .section{margin-bottom:56px;scroll-margin-top:64px;}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;}
+  .section-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#06222A;
+    background:var(--amber);border-radius:7px;padding:3px 9px;}
+  .section h2{font-size:25px;margin:0;font-weight:600;}
+  .section-sub{color:var(--ink-soft);font-size:14.5px;margin:6px 0 20px;max-width:660px;}
+
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;margin-bottom:14px;}
+  .grid{display:grid;gap:14px;}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+
+  .def-term{font-weight:600;font-size:15px;margin:0 0 4px;color:#fff;}
+  .def-body{font-size:14px;color:var(--ink-soft);margin:0;}
+  .formula-box{font-family:'JetBrains Mono',monospace;background:rgba(53,198,224,.08);
+    border:1.5px dashed var(--cyan);color:#BFEEF6;padding:10px 14px;border-radius:9px;font-size:14px;
+    font-weight:600;display:inline-block;margin:4px 6px 4px 0;}
+  .pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:2px 9px;
+    border-radius:100px;font-weight:600;letter-spacing:.03em;}
+  .pill-cyan{background:rgba(53,198,224,.14);color:#7FE0F0;}
+  .pill-magenta{background:rgba(232,93,158,.14);color:#F3A0C6;}
+  .pill-amber{background:rgba(242,184,75,.14);color:#F2C063;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);}
+  th{font-family:'Space Grotesk',sans-serif;font-weight:600;color:#BFEEF6;background:rgba(53,198,224,.06);}
+  tr:last-child td{border-bottom:none;}
+
+  .calc-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;align-items:flex-end;}
+  .field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px;}
+  .field label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);font-weight:600;}
+  .field input,.field select{font-family:'JetBrains Mono',monospace;font-size:14px;padding:8px 10px;
+    border:1.5px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);}
+  .field input:focus,.field select:focus{outline:2px solid var(--cyan);border-color:var(--cyan);}
+  .calc-btn{background:var(--magenta);color:#fff;border:none;padding:9px 18px;border-radius:8px;
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;cursor:pointer;}
+  .calc-btn:hover{background:#D2447F;}
+  .mode-toggle{display:flex;gap:8px;margin-bottom:12px;}
+  .mode-btn{background:var(--panel);border:1.5px solid var(--line);color:var(--ink-soft);
+    padding:6px 14px;border-radius:100px;font-family:'Space Grotesk',sans-serif;font-size:12.5px;
+    font-weight:600;cursor:pointer;}
+  .mode-btn.active{background:var(--cyan);border-color:var(--cyan);color:#06222A;}
+  .result-box{margin-top:12px;background:rgba(53,198,224,.07);border-left:4px solid var(--cyan);
+    padding:10px 14px;border-radius:0 8px 8px 0;font-family:'JetBrains Mono',monospace;font-size:13.5px;
+    color:#CDEFF6;font-weight:600;min-height:20px;line-height:1.6;}
+  .result-box.err{background:rgba(232,93,158,.09);border-left-color:var(--magenta);color:#F5B9D4;}
+
+  .explorer{background:linear-gradient(180deg,#151F2B,#101821);border-radius:18px;padding:26px;
+    border:1.5px solid var(--line);}
+  .explorer-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;align-items:center;}
+  @media(max-width:680px){.explorer-grid{grid-template-columns:1fr;}}
+  .explorer h3{margin:0 0 4px;font-size:19px;color:#fff;}
+  .explorer p.hint{color:var(--ink-soft);font-size:13px;margin:0 0 16px;}
+
+  .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+  .badge{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;
+    padding:8px 12px;flex:1;min-width:100px;}
+  .badge b{display:block;font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--amber);}
+  .badge span{font-size:10.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
+
+  footer{text-align:center;padding:26px 20px 30px;margin-top:20px;font-family:'Space Grotesk',sans-serif;
+    font-weight:600;letter-spacing:.04em;color:#fff;background:linear-gradient(135deg,#101820,#0C141C);
+    font-size:13.5px;text-transform:uppercase;border-top:1px solid var(--line);}
+  footer span{color:var(--amber);}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">● MATH 10 Reviewer</span>
+    <h1>Functions, Inequalities &amp; Statistics Lab</h1>
+    <p>Law of cosines, quadratic &amp; absolute value inequalities, and measures of position — reworked into live solvers and graphs you can test with your own numbers.</p>
+    <p class="hero-credit">Grade 10 Math Club Reviewer</p>
+    <div class="hero-credits">
+      <h2>Website made by:</h2>
+      <p>Khristein Giahn M. Papa (STE 10 - Zeal)<br>Jhiliane Leigh D. Tagupa (STE 10 - Zeal)</p>
+      <h2>Reviewer compiled by:</h2>
+      <p>Sofia Leigh S. Isidro (STE 10 - Zeal)<br>Angelica R. Galanta (STE 10 - Zeal)<br>Kashieca Kaye P. Renoballes (STE 10 - Zeal)<br>Quillan Zayx B. Sarmiento (STE 10 - Zeal)</p>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar"><div class="tabbar-inner" id="tabbar"></div></nav>
+
+<main>
+
+  <!-- 1 LAW OF COSINES -->
+  <section class="section" id="s-cosines">
+    <div class="section-head"><span class="section-num">01</span><h2>Law of Cosines — Oblique Triangles</h2></div>
+    <p class="section-sub">An oblique triangle has no 90° angle — it's either <b>acute</b> (all angles &lt; 90°) or <b>obtuse</b> (one angle &gt; 90°). The Law of Cosines solves for missing sides or angles.</p>
+
+    <div class="card">
+      <div class="formula-box">a² = b² + c² − 2bc·cos A</div>
+      <div class="formula-box">b² = a² + c² − 2ac·cos B</div>
+      <div class="formula-box">c² = a² + b² − 2ab·cos C</div>
+      <p class="def-body" style="margin-top:8px;">Lowercase sides sit opposite their matching uppercase angle: A↔a, B↔b, C↔c.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <p class="def-term">When to use it</p>
+        <p class="def-body"><span class="pill pill-cyan">SAS</span> know two sides + the angle between them → find the missing side.<br><br>
+        <span class="pill pill-magenta">SSS</span> know all three sides → find a missing angle.</p>
+      </div>
+      <div class="explorer" style="padding:20px;">
+        <div style="display:flex;justify-content:center;"><svg width="180" height="150" viewBox="0 0 180 150">
+          <polygon points="20,130 160,130 95,20" fill="rgba(53,198,224,.12)" stroke="#35C6E0" stroke-width="2.5"/>
+          <text x="12" y="145" fill="#8FA3B5" font-size="12" font-family="JetBrains Mono">A</text>
+          <text x="163" y="145" fill="#8FA3B5" font-size="12" font-family="JetBrains Mono">B</text>
+          <text x="90" y="14" fill="#8FA3B5" font-size="12" font-family="JetBrains Mono">C</text>
+          <text x="90" y="140" fill="#F2B84B" font-size="11" font-family="JetBrains Mono">c</text>
+          <text x="60" y="75" fill="#F2B84B" font-size="11" font-family="JetBrains Mono">b</text>
+          <text x="130" y="75" fill="#F2B84B" font-size="11" font-family="JetBrains Mono">a</text>
+        </svg></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="def-term">Triangle solver</p>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="mode-sas" onclick="setCosMode('sas')">SAS → find side</button>
+        <button class="mode-btn" id="mode-sss" onclick="setCosMode('sss')">SSS → find angle</button>
+      </div>
+      <div id="cos-sas-fields" class="calc-row">
+        <div class="field"><label>Side b</label><input type="number" id="cos-b" placeholder="8"></div>
+        <div class="field"><label>Side c</label><input type="number" id="cos-c" placeholder="6"></div>
+        <div class="field"><label>Angle A (°)</label><input type="number" id="cos-A" placeholder="60"></div>
+        <button class="calc-btn" onclick="solveSAS()">Solve for a</button>
+      </div>
+      <div id="cos-sss-fields" class="calc-row" style="display:none;">
+        <div class="field"><label>Side a</label><input type="number" id="cos-a2" placeholder="7"></div>
+        <div class="field"><label>Side b</label><input type="number" id="cos-b2" placeholder="8"></div>
+        <div class="field"><label>Side c</label><input type="number" id="cos-c2" placeholder="6"></div>
+        <button class="calc-btn" onclick="solveSSS()">Solve for angle A</button>
+      </div>
+      <div class="result-box" id="cos-result">Enter values to solve the triangle.</div>
+    </div>
+  </section>
+
+  <!-- 2 QUADRATIC INEQ 1 VAR -->
+  <section class="section" id="s-quad1">
+    <div class="section-head"><span class="section-num">02</span><h2>Quadratic Inequalities — One Variable</h2></div>
+    <p class="section-sub">A quadratic inequality contains a variable raised to the 2nd power, e.g. <span class="mono">x² + 3x − 4 &gt; 0</span>.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <p class="def-term">Interval notation</p>
+        <table>
+          <tr><th>Symbol</th><th>Endpoint</th><th>Notation used</th></tr>
+          <tr><td class="mono">&gt;  or  &lt;</td><td>NOT included</td><td class="mono">( )</td></tr>
+          <tr><td class="mono">≥  or  ≤</td><td>INCLUDED</td><td class="mono">[ ]</td></tr>
+        </table>
+        <p class="def-body" style="margin-top:8px;">e.g. <span class="mono">x &gt; 3 → (3, ∞)</span></p>
+      </div>
+      <div class="card">
+        <p class="def-term">Inequality symbols</p>
+        <p class="def-body mono">&gt; greater than &nbsp;·&nbsp; &lt; less than<br>≥ greater than or equal &nbsp;·&nbsp; ≤ less than or equal</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="def-term">Solve ax² + bx + c ▢ 0</p>
+      <div class="calc-row">
+        <div class="field"><label>a</label><input type="number" id="q1-a" placeholder="1"></div>
+        <div class="field"><label>b</label><input type="number" id="q1-b" placeholder="3"></div>
+        <div class="field"><label>c</label><input type="number" id="q1-c" placeholder="-4"></div>
+        <div class="field"><label>symbol</label>
+          <select id="q1-sym"><option value=">">&gt;</option><option value="<">&lt;</option><option value=">=">≥</option><option value="<=">≤</option></select>
+        </div>
+        <button class="calc-btn" onclick="solveQuad1()">Solve</button>
+      </div>
+      <svg id="q1Svg" width="100%" height="70" viewBox="0 0 600 70"></svg>
+      <div class="result-box" id="q1-result">Try a=1, b=3, c=-4, symbol &gt; to check x²+3x−4&gt;0.</div>
+    </div>
+  </section>
+
+  <!-- 3 QUADRATIC INEQ 2 VAR -->
+  <section class="section" id="s-quad2">
+    <div class="section-head"><span class="section-num">03</span><h2>Quadratic Inequalities — Two Variables</h2></div>
+    <p class="section-sub">Forms: <span class="mono">y &gt; ax²+bx+c</span>, <span class="mono">y ≥ …</span>, <span class="mono">y &lt; …</span>, <span class="mono">y ≤ …</span> (a ≠ 0). The solution is a shaded region, not just a curve.</p>
+
+    <div class="explorer">
+      <div class="explorer-grid">
+        <div><svg id="paraSvg" width="100%" height="280" viewBox="0 0 320 280"></svg></div>
+        <div>
+          <h3>Region Shader</h3>
+          <p class="hint">Set a, b, c and the symbol — the boundary and shaded region update live.</p>
+          <div class="calc-row">
+            <div class="field"><label>a</label><input type="number" id="q2-a" value="1"></div>
+            <div class="field"><label>b</label><input type="number" id="q2-b" value="0"></div>
+            <div class="field"><label>c</label><input type="number" id="q2-c" value="-2"></div>
+            <div class="field"><label>symbol</label>
+              <select id="q2-sym"><option value=">">y &gt;</option><option value=">=">y ≥</option><option value="<">y &lt;</option><option value="<=" selected>y ≤</option></select>
+            </div>
+          </div>
+          <button class="calc-btn" onclick="updateParabola()">Update graph</button>
+          <div class="badge-row">
+            <div class="badge"><b id="pa-vertex">—</b><span>vertex</span></div>
+            <div class="badge"><b id="pa-boundary">—</b><span>boundary</span></div>
+            <div class="badge"><b id="pa-test">—</b><span>(0,0) test</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <p class="def-term">4-step procedure</p>
+      <p class="def-body">1. Find the vertex <span class="mono">h = −b/2a</span>, plug in for k, plus x- and y-intercepts.<br>
+      2. Draw the boundary: <b>dashed</b> for strict (&lt; &gt;), <b>solid</b> for non-strict (≤ ≥).<br>
+      3. Pick a test point — usually (0,0) — plug into the inequality.<br>
+      4. Shade the region where the test point makes the inequality true.</p>
+      <p class="def-body" style="margin-top:8px;"><b>Shortcut:</b> y &gt; / y ≥ → shade above/inside an upward parabola (outside a downward one). y &lt; / y ≤ → shade below/outside an upward parabola (inside a downward one).</p>
+    </div>
+  </section>
+
+  <!-- 4 REGION OF SOLUTIONS -->
+  <section class="section" id="s-region">
+    <div class="section-head"><span class="section-num">04</span><h2>Region of Solutions — Linear vs Quadratic</h2></div>
+    <div class="card">
+      <p class="def-body">To verify a shaded region, check three things: <b>boundary type</b> (solid/dashed), <b>which side</b> the shading falls on, and — for systems — the <b>overlapping region</b> where two or more shaded areas intersect.</p>
+      <table style="margin-top:10px;">
+        <tr><th>Type</th><th>y &gt; / y ≥</th><th>y &lt; / y ≤</th></tr>
+        <tr><td>Linear</td><td>shade above the line</td><td>shade below the line</td></tr>
+        <tr><td>Quadratic (opens up)</td><td>shade above / inside</td><td>shade below / outside</td></tr>
+        <tr><td>Quadratic (opens down)</td><td>shade outside</td><td>shade inside</td></tr>
+      </table>
+    </div>
+
+    <div class="explorer">
+      <div class="explorer-grid">
+        <div><svg id="linSvg" width="100%" height="280" viewBox="0 0 320 280"></svg></div>
+        <div>
+          <h3>Linear Region Shader</h3>
+          <p class="hint">Set m, b and the symbol for y ▢ mx + b — the boundary and shaded region update live.</p>
+          <div class="calc-row">
+            <div class="field"><label>m</label><input type="number" id="lin-m" value="1"></div>
+            <div class="field"><label>b</label><input type="number" id="lin-b" value="1"></div>
+            <div class="field"><label>symbol</label>
+              <select id="lin-sym"><option value=">">y &gt;</option><option value=">=">y ≥</option><option value="<">y &lt;</option><option value="<=" selected>y ≤</option></select>
+            </div>
+          </div>
+          <button class="calc-btn" onclick="updateLinear()">Update graph</button>
+          <div class="badge-row">
+            <div class="badge"><b id="lin-boundary">—</b><span>boundary</span></div>
+            <div class="badge"><b id="lin-test">—</b><span>(0,0) test</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5+6 ABSOLUTE VALUE -->
+  <section class="section" id="s-absval">
+    <div class="section-head"><span class="section-num">05</span><h2>Absolute Value Equations &amp; Inequalities</h2></div>
+    <p class="section-sub">Absolute value is a number's distance from 0 on the number line — always non-negative.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <p class="def-term">Equation solver</p>
+        <div class="formula-box">|x| = a → x = a OR x = −a</div>
+        <div class="calc-row">
+          <div class="field"><label>a</label><input type="number" id="av-eq-a" placeholder="5"></div>
+          <button class="calc-btn" onclick="solveAbsEq()">Solve</button>
+        </div>
+        <div class="result-box" id="av-eq-result">Try a = 5 → {−5, 5}</div>
+      </div>
+      <div class="card">
+        <p class="def-term">Inequality solver</p>
+        <div class="formula-box mono" style="display:block;">|x| &lt; a → −a &lt; x &lt; a &nbsp;(between = AND)</div>
+        <div class="formula-box mono" style="display:block;">|x| &gt; a → x &lt; −a OR x &gt; a &nbsp;(outside = OR)</div>
+        <div class="calc-row">
+          <div class="field"><label>symbol</label><select id="av-sym"><option value="<">&lt;</option><option value=">">&gt;</option></select></div>
+          <div class="field"><label>a</label><input type="number" id="av-ineq-a" placeholder="5"></div>
+          <button class="calc-btn" onclick="solveAbsIneq()">Solve</button>
+        </div>
+        <div class="result-box" id="av-ineq-result">Try |x| &lt; 5 → (−5, 5)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 MEASURES OF POSITION -->
+  <section class="section" id="s-position">
+    <div class="section-head"><span class="section-num">06</span><h2>Measures of Position</h2></div>
+    <p class="section-sub">Quartiles (4 parts), deciles (10 parts), and percentiles (100 parts) all tell you <b>where</b> a value sits in an ordered dataset — not a percent score.</p>
+
+    <div class="grid grid-3">
+      <div class="card"><p class="def-term">Quartiles (Q)</p><div class="formula-box" style="font-size:12.5px;">Qk = k(n+1)/4</div><p class="def-body">Q1=25% below · Q2=median · Q3=75% below</p></div>
+      <div class="card"><p class="def-term">Deciles (D)</p><div class="formula-box" style="font-size:12.5px;">Dk = k(n+1)/10</div><p class="def-body">D1…D9, splits data into 10 groups. D5 = median.</p></div>
+      <div class="card"><p class="def-term">Percentiles (P)</p><div class="formula-box" style="font-size:12.5px;">Pk = k(n+1)/100</div><p class="def-body">P1…P99. P25=Q1, P50=Median, P75=Q3.</p></div>
+    </div>
+
+    <div class="card">
+      <p class="def-term">Interpolating a decimal position</p>
+      <div class="formula-box">Value = (Larger − Smaller) × decimal + Smaller</div>
+      <p class="def-body" style="margin-top:6px;">e.g. data 5,8,12,15,18,20,24,27,30,35 → Q1 position = 2.75 → smaller=8, larger=12, decimal=0.75 → Q1 = (12−8)(0.75)+8 = <b>11</b>.</p>
+      <p class="def-body" style="margin-top:6px;"><b>Reading a percentile:</b> a student at the 80th percentile scored at or above ~80% of the group — that's <i>not</i> the same as scoring 80% on the test.</p>
+    </div>
+
+    <div class="card">
+      <p class="def-term">Position calculator — paste your dataset</p>
+      <div class="calc-row">
+        <div class="field" style="flex:3;"><label>Data (comma-separated)</label><input type="text" id="mp-data" placeholder="68,50,85,60,92,45,75,82,55,90,62,80,65,88,70"></div>
+        <div class="field"><label>find percentile (k)</label><input type="number" id="mp-k" placeholder="70"></div>
+        <button class="calc-btn" onclick="solvePosition()">Analyze</button>
+      </div>
+      <div class="result-box" id="mp-result">Paste the quiz-scores example and set k = 70 to match the reviewer's worked example.</div>
+      <svg id="boxSvg" width="100%" height="110" viewBox="0 0 600 110" style="margin-top:8px;"></svg>
+    </div>
+  </section>
+
+  <!-- 8 BOX PLOTS / CUMULATIVE FREQ -->
+  <section class="section" id="s-boxplot">
+    <div class="section-head"><span class="section-num">07</span><h2>Box-and-Whisker Plots &amp; Cumulative Frequency</h2></div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <p class="def-term">The five-number summary</p>
+        <p class="def-body">Minimum · Q1 · Median (Q2) · Q3 · Maximum</p>
+        <ul class="def-body" style="padding-left:18px; margin-top:8px;">
+          <li>Left whisker → minimum to Q1</li>
+          <li>Box → Q1 to Q3 (the middle 50%)</li>
+          <li>Line inside box → median</li>
+          <li>Right whisker → Q3 to maximum</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="def-term">Interquartile range &amp; outliers</p>
+        <div class="formula-box">IQR = Q3 − Q1</div>
+        <div class="formula-box">Lower fence = Q1 − 1.5×IQR</div>
+        <div class="formula-box">Upper fence = Q3 + 1.5×IQR</div>
+        <p class="def-body" style="margin-top:6px;">Any value beyond the fences is an <b>outlier</b>. Small IQR → tightly grouped middle 50%; large IQR → more spread out. (Use the calculator above — outliers show up automatically.)</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="def-term">Cumulative frequency builder — paste your own data</p>
+      <p class="def-body">The <b>last</b> cumulative frequency always equals the total count (n). Plotting these running totals and connecting the points makes a <b>cumulative frequency polygon (ogive)</b> — it shows how many observations sit at or below each value.</p>
+      <div class="calc-row">
+        <div class="field" style="flex:3;"><label>Score:Frequency pairs (comma-separated)</label><input type="text" id="cf-data" placeholder="10:3,20:5,30:4,40:6"></div>
+        <button class="calc-btn" onclick="buildCumulative()">Build table</button>
+      </div>
+      <div class="result-box" id="cf-result">Paste pairs like 10:3,20:5,30:4,40:6 and press Build table.</div>
+      <div id="cf-tableWrap" style="margin-top:10px; overflow-x:auto;"></div>
+      <svg id="ogiveSvg" width="100%" height="140" viewBox="0 0 600 140" style="margin-top:8px;"></svg>
+    </div>
+  </section>
+
+</main>
+
+<footer>MATHEMATICS CLUB <span>·</span> STA. ELENA HIGH SCHOOL</footer>
+
+
+<script>
+/* ---------- nav ---------- */
+const sections = [
+  ["s-cosines","Law of Cosines"],["s-quad1","Quad. Ineq (1 Var)"],["s-quad2","Quad. Ineq (2 Var)"],
+  ["s-region","Region of Solutions"],["s-absval","Absolute Value"],["s-position","Measures of Position"],
+  ["s-boxplot","Box Plots & CF"]
+];
+const tabbar = document.getElementById('tabbar');
+sections.forEach(([id,label])=>{
+  const b=document.createElement('button'); b.className='tab'; b.textContent=label;
+  b.onclick=()=>document.getElementById(id).scrollIntoView({behavior:'smooth'}); b.dataset.target=id;
+  tabbar.appendChild(b);
+});
+const tabs=[...document.querySelectorAll('.tab')];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tabs.forEach(t=>t.classList.toggle('active',t.dataset.target===e.target.id));}});},{rootMargin:"-40% 0px -50% 0px"});
+sections.forEach(([id])=>io.observe(document.getElementById(id)));
+
+function round2(x){return Math.round(x*100)/100;}
+
+/* ---------- Law of Cosines ---------- */
+function setCosMode(m){
+  document.getElementById('mode-sas').classList.toggle('active', m==='sas');
+  document.getElementById('mode-sss').classList.toggle('active', m==='sss');
+  document.getElementById('cos-sas-fields').style.display = m==='sas' ? 'flex':'none';
+  document.getElementById('cos-sss-fields').style.display = m==='sss' ? 'flex':'none';
+  document.getElementById('cos-result').textContent = m==='sas' ? 'Enter b, c and angle A to find side a.' : 'Enter a, b, c to find angle A.';
+  document.getElementById('cos-result').className='result-box';
+}
+function solveSAS(){
+  const b=parseFloat(document.getElementById('cos-b').value);
+  const c=parseFloat(document.getElementById('cos-c').value);
+  const A=parseFloat(document.getElementById('cos-A').value);
+  const res=document.getElementById('cos-result');
+  if([b,c,A].some(isNaN)){res.className='result-box err';res.textContent='Fill in b, c and angle A.';return;}
+  const a=Math.sqrt(b*b+c*c-2*b*c*Math.cos(A*Math.PI/180));
+  res.className='result-box';
+  res.textContent = `a² = ${b}² + ${c}² − 2(${b})(${c})cos(${A}°)  →  a = ${round2(a)}`;
+}
+function solveSSS(){
+  const a=parseFloat(document.getElementById('cos-a2').value);
+  const b=parseFloat(document.getElementById('cos-b2').value);
+  const c=parseFloat(document.getElementById('cos-c2').value);
+  const res=document.getElementById('cos-result');
+  if([a,b,c].some(isNaN)){res.className='result-box err';res.textContent='Fill in a, b and c.';return;}
+  const cosA=(b*b+c*c-a*a)/(2*b*c);
+  if(cosA<-1||cosA>1){res.className='result-box err';res.textContent='These three sides can\'t form a triangle.';return;}
+  const A=Math.acos(cosA)*180/Math.PI;
+  res.className='result-box';
+  res.textContent = `cos A = (${b}²+${c}²−${a}²)/(2·${b}·${c})  →  A = ${round2(A)}°`;
+}
+
+/* ---------- Quadratic inequality 1 var ---------- */
+function solveQuad1(){
+  const a=parseFloat(document.getElementById('q1-a').value);
+  const b=parseFloat(document.getElementById('q1-b').value);
+  const c=parseFloat(document.getElementById('q1-c').value);
+  const sym=document.getElementById('q1-sym').value;
+  const res=document.getElementById('q1-result');
+  const svg=document.getElementById('q1Svg');
+  if([a,b,c].some(isNaN)||a===0){res.className='result-box err';res.textContent='Enter a (≠0), b and c.';return;}
+  const d=b*b-4*a*c;
+  const strict = (sym==='>'||sym==='<');
+  const openB = strict ? '(':'[', closeB = strict ? ')':']';
+  let text='', r1=null, r2=null;
+  if(d<0){
+    const alwaysPos = a>0;
+    const trueForAll = (alwaysPos && (sym==='>'||sym==='>=')) || (!alwaysPos && (sym==='<'||sym==='<='));
+    text = trueForAll ? 'No real roots — the expression is ' + (alwaysPos?'always positive':'always negative') + ', so the solution is all real numbers (−∞, ∞).'
+                       : 'No real roots — the expression is ' + (alwaysPos?'always positive':'always negative') + ', so there is no solution (∅).';
+  } else {
+    const sq=Math.sqrt(d);
+    r1=round2(Math.min((-b-sq)/(2*a),(-b+sq)/(2*a)));
+    r2=round2(Math.max((-b-sq)/(2*a),(-b+sq)/(2*a)));
+    const upward = a>0;
+    let interval;
+    if((upward && (sym==='>'||sym==='>=')) || (!upward && (sym==='<'||sym==='<='))){
+      interval = `(−∞, ${r1}${sym.includes('=')?']':')'} ∪ ${sym.includes('=')?'[':'('}${r2}, ∞)`;
+    } else {
+      interval = `${openB}${r1}, ${r2}${closeB}`;
+    }
+    text = `Roots at x = ${r1} and x = ${r2}. Solution set: ${interval}`;
+  }
+  res.className='result-box';
+  res.textContent = text;
+  // number line render
+  let lo = r1!==null? r1-3 : -5, hi = r2!==null? r2+3 : 5;
+  const x = t => 30 + (t-lo)/(hi-lo)*540;
+  let svgHtml = `<line x1="30" y1="35" x2="570" y2="35" stroke="#8FA3B5" stroke-width="2"/>`;
+  if(r1!==null){
+    svgHtml += `<circle cx="${x(r1)}" cy="35" r="6" fill="${strict?'#0F1720':'#35C6E0'}" stroke="#35C6E0" stroke-width="2"/>`;
+    svgHtml += `<text x="${x(r1)}" y="58" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#8FA3B5">${r1}</text>`;
+    svgHtml += `<circle cx="${x(r2)}" cy="35" r="6" fill="${strict?'#0F1720':'#35C6E0'}" stroke="#35C6E0" stroke-width="2"/>`;
+    svgHtml += `<text x="${x(r2)}" y="58" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#8FA3B5">${r2}</text>`;
+  }
+  svg.innerHTML = svgHtml;
+}
+
+/* ---------- Quadratic inequality 2 var (signature parabola shader) ---------- */
+const pxMin=-8,pxMax=8,pyMin=-6,pyMax=10, padL=34, padT=14, plotW=252, plotH=252;
+function sx(x){return padL + (x-pxMin)/(pxMax-pxMin)*plotW;}
+function sy(y){return padT + (pyMax-y)/(pyMax-pyMin)*plotH;}
+function updateParabola(){
+  const a=parseFloat(document.getElementById('q2-a').value)||0;
+  const b=parseFloat(document.getElementById('q2-b').value)||0;
+  const c=parseFloat(document.getElementById('q2-c').value)||0;
+  const sym=document.getElementById('q2-sym').value;
+  const svg=document.getElementById('paraSvg');
+  if(a===0){document.getElementById('pa-vertex').textContent='a≠0!'; return;}
+  const h=-b/(2*a), k=a*h*h+b*h+c;
+  document.getElementById('pa-vertex').textContent = `(${round2(h)}, ${round2(k)})`;
+  const strict = (sym==='>'||sym==='<');
+  document.getElementById('pa-boundary').textContent = strict ? 'Dashed' : 'Solid';
+  const f0 = c; // f(0,0)=a*0+b*0+c compare with y=0 -> test point (0,0): is 0 sym f(0)?
+  let testTrue;
+  if(sym==='>') testTrue = 0 > f0;
+  else if(sym==='>=') testTrue = 0 >= f0;
+  else if(sym==='<') testTrue = 0 < f0;
+  else testTrue = 0 <= f0;
+  document.getElementById('pa-test').textContent = testTrue ? 'TRUE' : 'FALSE';
+
+  // sample curve
+  let pts=[];
+  const steps=60;
+  for(let i=0;i<=steps;i++){
+    const xv = pxMin + (pxMax-pxMin)*i/steps;
+    let yv = a*xv*xv+b*xv+c;
+    yv = Math.max(pyMin-4, Math.min(pyMax+4, yv));
+    pts.push([xv,yv]);
+  }
+  const curvePts = pts.map(p=>`${sx(p[0])},${sy(p[1])}`).join(' ');
+  const shadeAbove = (sym==='>'||sym==='>=');
+  const edgeY = shadeAbove ? pyMax : pyMin;
+  const shadePts = pts.map(p=>`${sx(p[0])},${sy(p[1])}`).join(' ') +
+    ` ${sx(pxMax)},${sy(edgeY)} ${sx(pxMin)},${sy(edgeY)}`;
+
+  // grid + axes
+  let grid='';
+  for(let gx=pxMin; gx<=pxMax; gx+=2){grid+=`<line x1="${sx(gx)}" y1="${padT}" x2="${sx(gx)}" y2="${padT+plotH}" stroke="rgba(255,255,255,0.05)"/>`;}
+  for(let gy=pyMin; gy<=pyMax; gy+=2){grid+=`<line x1="${padL}" y1="${sy(gy)}" x2="${padL+plotW}" y2="${sy(gy)}" stroke="rgba(255,255,255,0.05)"/>`;}
+
+  const dash = strict ? 'stroke-dasharray="6,5"' : '';
+  svg.innerHTML = `
+    ${grid}
+    <line x1="${padL}" y1="${sy(0)}" x2="${padL+plotW}" y2="${sy(0)}" stroke="#3A4C5C" stroke-width="1.5"/>
+    <line x1="${sx(0)}" y1="${padT}" x2="${sx(0)}" y2="${padT+plotH}" stroke="#3A4C5C" stroke-width="1.5"/>
+    <polygon points="${shadePts}" fill="rgba(232,93,158,0.22)"/>
+    <polyline points="${curvePts}" fill="none" stroke="#E85D9E" stroke-width="3" ${dash}/>
+    <circle cx="${sx(0)}" cy="${sy(0)}" r="5" fill="${testTrue?'#35C6E0':'#8FA3B5'}" stroke="#0F1720" stroke-width="1.5"/>
+  `;
+}
+updateParabola();
+
+/* ---------- linear region shader (region of solutions) ---------- */
+function updateLinear(){
+  const m=parseFloat(document.getElementById('lin-m').value)||0;
+  const b=parseFloat(document.getElementById('lin-b').value)||0;
+  const sym=document.getElementById('lin-sym').value;
+  const svg=document.getElementById('linSvg');
+  const strict = (sym==='>'||sym==='<');
+  document.getElementById('lin-boundary').textContent = strict ? 'Dashed' : 'Solid';
+  const f0 = b; // m*0+b
+  let testTrue;
+  if(sym==='>') testTrue = 0 > f0;
+  else if(sym==='>=') testTrue = 0 >= f0;
+  else if(sym==='<') testTrue = 0 < f0;
+  else testTrue = 0 <= f0;
+  document.getElementById('lin-test').textContent = testTrue ? 'TRUE' : 'FALSE';
+
+  const clip = v => Math.max(pyMin-4, Math.min(pyMax+4, v));
+  const pts = [[pxMin, clip(m*pxMin+b)], [pxMax, clip(m*pxMax+b)]];
+  const curvePts = pts.map(p=>`${sx(p[0])},${sy(p[1])}`).join(' ');
+  const shadeAbove = (sym==='>'||sym==='>=');
+  const edgeY = shadeAbove ? pyMax : pyMin;
+  const shadePts = curvePts + ` ${sx(pxMax)},${sy(edgeY)} ${sx(pxMin)},${sy(edgeY)}`;
+
+  let grid='';
+  for(let gx=pxMin; gx<=pxMax; gx+=2){grid+=`<line x1="${sx(gx)}" y1="${padT}" x2="${sx(gx)}" y2="${padT+plotH}" stroke="rgba(255,255,255,0.05)"/>`;}
+  for(let gy=pyMin; gy<=pyMax; gy+=2){grid+=`<line x1="${padL}" y1="${sy(gy)}" x2="${padL+plotW}" y2="${sy(gy)}" stroke="rgba(255,255,255,0.05)"/>`;}
+
+  const dash = strict ? 'stroke-dasharray="6,5"' : '';
+  svg.innerHTML = `
+    ${grid}
+    <line x1="${padL}" y1="${sy(0)}" x2="${padL+plotW}" y2="${sy(0)}" stroke="#3A4C5C" stroke-width="1.5"/>
+    <line x1="${sx(0)}" y1="${padT}" x2="${sx(0)}" y2="${padT+plotH}" stroke="#3A4C5C" stroke-width="1.5"/>
+    <polygon points="${shadePts}" fill="rgba(53,198,224,0.22)"/>
+    <polyline points="${curvePts}" fill="none" stroke="#35C6E0" stroke-width="3" ${dash}/>
+    <circle cx="${sx(0)}" cy="${sy(0)}" r="5" fill="${testTrue?'#E85D9E':'#8FA3B5'}" stroke="#0F1720" stroke-width="1.5"/>
+  `;
+}
+updateLinear();
+
+/* ---------- absolute value ---------- */
+function solveAbsEq(){
+  const a=parseFloat(document.getElementById('av-eq-a').value);
+  const res=document.getElementById('av-eq-result');
+  if(isNaN(a)||a<0){res.className='result-box err';res.textContent='Enter a ≥ 0.';return;}
+  res.className='result-box';
+  res.textContent = a===0 ? 'x = 0 (only solution)' : `x = ${a} OR x = ${-a}  →  {${-a}, ${a}}`;
+}
+function solveAbsIneq(){
+  const sym=document.getElementById('av-sym').value;
+  const a=parseFloat(document.getElementById('av-ineq-a').value);
+  const res=document.getElementById('av-ineq-result');
+  if(isNaN(a)){res.className='result-box err';res.textContent='Enter a value for a.';return;}
+  if(a<=0 && sym==='<'){res.className='result-box err';res.textContent='|x| < a has no solution when a ≤ 0.';return;}
+  if(a<0 && sym==='>'){res.className='result-box';res.textContent='|x| > a is true for all real numbers (a is negative).';return;}
+  res.className='result-box';
+  if(sym==='<') res.textContent = `−${a} < x < ${a}  →  interval (−${a}, ${a})`;
+  else res.textContent = `x < −${a} OR x > ${a}  →  interval (−∞, −${a}) ∪ (${a}, ∞)`;
+}
+
+/* ---------- measures of position ---------- */
+function interp(sortedArr, pos){
+  const n=sortedArr.length;
+  const floorPos=Math.floor(pos), frac=pos-floorPos;
+  if(floorPos<1) return sortedArr[0];
+  if(floorPos>=n) return sortedArr[n-1];
+  const smaller=sortedArr[floorPos-1], larger=sortedArr[floorPos];
+  return smaller + frac*(larger-smaller);
+}
+function solvePosition(){
+  const raw=document.getElementById('mp-data').value;
+  const kEl=document.getElementById('mp-k');
+  const res=document.getElementById('mp-result');
+  const boxSvg=document.getElementById('boxSvg');
+  const arr = raw.split(',').map(s=>parseFloat(s.trim())).filter(v=>!isNaN(v));
+  if(arr.length<2){res.className='result-box err';res.textContent='Paste at least 2 comma-separated numbers.';return;}
+  arr.sort((a,b)=>a-b);
+  const n=arr.length;
+  const q1=interp(arr, 1*(n+1)/4), q2=interp(arr, 2*(n+1)/4), q3=interp(arr, 3*(n+1)/4);
+  const iqr=q3-q1, lowFence=q1-1.5*iqr, upFence=q3+1.5*iqr;
+  const outliers=arr.filter(v=>v<lowFence || v>upFence);
+  const min=arr[0], max=arr[n-1];
+  let extra='';
+  const k=parseFloat(kEl.value);
+  if(!isNaN(k)){
+    const pk = interp(arr, k*(n+1)/100);
+    extra = ` | P${k} (position ${round2(k*(n+1)/100)}) = ${round2(pk)} → this value is at or above about ${k}% of the dataset.`;
+  }
+  res.className='result-box';
+  res.textContent = `n=${n} · Min=${round2(min)} · Q1=${round2(q1)} · Median=${round2(q2)} · Q3=${round2(q3)} · Max=${round2(max)} · IQR=${round2(iqr)} · Outliers: ${outliers.length?outliers.join(', '):'none'}${extra}`;
+
+  // box plot render
+  const lo=Math.min(min,lowFence)-1, hi=Math.max(max,upFence)+1;
+  const x = v => 30 + (v-lo)/(hi-lo)*540;
+  boxSvg.innerHTML = `
+    <line x1="${x(min)}" y1="55" x2="${x(q1)}" y2="55" stroke="#8FA3B5" stroke-width="2"/>
+    <line x1="${x(q3)}" y1="55" x2="${x(max)}" y2="55" stroke="#8FA3B5" stroke-width="2"/>
+    <line x1="${x(min)}" y1="42" x2="${x(min)}" y2="68" stroke="#8FA3B5" stroke-width="2"/>
+    <line x1="${x(max)}" y1="42" x2="${x(max)}" y2="68" stroke="#8FA3B5" stroke-width="2"/>
+    <rect x="${x(q1)}" y="35" width="${x(q3)-x(q1)}" height="40" fill="rgba(53,198,224,.15)" stroke="#35C6E0" stroke-width="2"/>
+    <line x1="${x(q2)}" y1="35" x2="${x(q2)}" y2="75" stroke="#E85D9E" stroke-width="3"/>
+    <text x="${x(min)}" y="90" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#8FA3B5">min</text>
+    <text x="${x(q1)}" y="90" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#8FA3B5">Q1</text>
+    <text x="${x(q2)}" y="20" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#F3A0C6">median</text>
+    <text x="${x(q3)}" y="90" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#8FA3B5">Q3</text>
+    <text x="${x(max)}" y="90" text-anchor="middle" font-size="11" font-family="JetBrains Mono" fill="#8FA3B5">max</text>
+  `;
+}
+
+/* ---------- cumulative frequency / ogive builder ---------- */
+function buildCumulative(){
+  const raw=document.getElementById('cf-data').value;
+  const res=document.getElementById('cf-result');
+  const wrap=document.getElementById('cf-tableWrap');
+  const svg=document.getElementById('ogiveSvg');
+  const pairs = raw.split(',').map(s=>s.trim()).filter(Boolean).map(s=>{
+    const parts=s.split(':');
+    return {score:parseFloat(parts[0]), freq:parseFloat(parts[1])};
+  }).filter(p=>!isNaN(p.score)&&!isNaN(p.freq));
+  if(pairs.length<2){res.className='result-box err';res.textContent='Enter at least 2 pairs like 10:3,20:5 (score:frequency).';return;}
+  pairs.sort((a,b)=>a.score-b.score);
+  let running=0;
+  pairs.forEach(p=>{running+=p.freq; p.cum=running;});
+  const n=running;
+  res.className='result-box';
+  res.textContent = `n = ${n}. The last cumulative frequency (${pairs[pairs.length-1].cum}) matches n, confirming the running total is complete.`;
+
+  const rows = pairs.map(p=>`<tr><td>${p.score}</td><td>${p.freq}</td><td>${p.cum}</td></tr>`).join('');
+  wrap.innerHTML = `<table><tr><th>Score</th><th>Frequency</th><th>Cumulative Frequency</th></tr>${rows}</table>`;
+
+  const scores=pairs.map(p=>p.score);
+  const lo=Math.min(...scores), hi=Math.max(...scores);
+  const x = v => 40 + (hi>lo ? (v-lo)/(hi-lo) : 0)*520;
+  const y = v => 120 - (v/n)*100;
+  const linePts = pairs.map(p=>`${x(p.score)},${y(p.cum)}`).join(' ');
+  const dots = pairs.map(p=>`<circle cx="${x(p.score)}" cy="${y(p.cum)}" r="4" fill="#E85D9E"/>`).join('');
+  const labels = pairs.map(p=>`<text x="${x(p.score)}" y="134" text-anchor="middle" font-size="10" font-family="JetBrains Mono" fill="#8FA3B5">${p.score}</text>`).join('');
+  svg.innerHTML = `
+    <line x1="30" y1="120" x2="570" y2="120" stroke="#8FA3B5" stroke-width="1.5"/>
+    <line x1="30" y1="10" x2="30" y2="120" stroke="#8FA3B5" stroke-width="1.5"/>
+    <polyline points="${linePts}" fill="none" stroke="#35C6E0" stroke-width="2.5"/>
+    ${dots}${labels}
+  `;
+}
+document.getElementById('cf-data').value = '10:3,20:5,30:4,40:6';
+buildCumulative();
+</script>
+</body>
+</html>
